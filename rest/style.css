@@ -1,0 +1,87 @@
+* {
+    margin: 0 auto;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    background-color: #f1f1f1;
+  }
+  
+  /* The progress container (grey background) */
+  .progress-container {
+    width: 100%;
+    height: 8px; 
+    background: #ccc;
+  }
+  
+  /* The progress bar (scroll indicator) */
+  .progress-bar {
+    height: 8px;
+    margin: 0;
+    background: #8b4caf;
+    width: 0%;
+  }
+
+
+.fon {
+    width: 100%;
+    height: 125px;
+    background-color: rgb(255, 255, 255);
+    z-index: 50;
+    position: fixed;
+    margin-top: -140px;
+}
+
+.button , ul {
+    z-index: 100;
+    width: 350px;
+    height: 40px;
+    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -175px 0 0 -175px;
+    margin-top: -450px;
+}
+
+ul {
+    margin-top: -395px;
+}
+
+input {
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgb(200, 137, 137);
+    max-width: 100%;
+    border: none;
+}
+
+#table {
+    margin-top: 140px;
+}
+
+#table td {
+	padding: 10px;
+	border: 1px solid black;
+}
+
+
+#pagination {
+	display: flex;
+	padding: 0;
+	list-style-type: none;
+}
+
+#pagination li {
+	padding: 10px;
+	border: 1px solid black;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#pagination li:hover, #pagination li.active {
+	color: red;
+	border: 1px solid red;
+}

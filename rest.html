@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="rest/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <script src="rest/rest.js"></script>
+    <div class="fon"></div>
+    <div class="header">
+        <div class="progress-container">
+          <div class="progress-bar" id="myBar"></div>
+        </div>  
+      </div>
+    <div class="button">
+        <input type="button" value="albums" onclick="request(requestUrlAlbums, i);">
+        <input type="button" value="comments" onclick="request(requestUrlComments, i)">
+        <input type="button" value="posts" onclick="request(requestUrlPosts, i);">
+        <input type="button" value="photos" onclick="request(requestUrlPhotos, i);">
+    </div>
+    <ul id="pagination"></ul>
+    <table id="table"></table>
+</body>
+</html>
