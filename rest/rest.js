@@ -11,7 +11,7 @@ function sendRequest(method, url, post=null) {
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest()
         xhr.open(method, url);
-        xhr.responseType ='json';
+        xhr.responseType ='json'; 
         xhr.setRequestHeader('Content-Type', 'application/json')
         xhr.onload = () => {
             if (xhr.status >= 400) {
@@ -24,96 +24,55 @@ function sendRequest(method, url, post=null) {
         xhr.onrerror = () => {  
             reject(xhr.response);  
         }
-        xhr.send(JSON.stringify(post));  
+        xhr.send(JSON.stringify(post)); 
     })
 }
-const requestUrlPosts = 'https://jsonplaceholder.typicode.com/posts',
-      requestUrlPhotos = 'https://jsonplaceholder.typicode.com/photos',
-      requestUrlComments = 'https://jsonplaceholder.typicode.com/comments',
-      requestUrlAlbums = 'https://jsonplaceholder.typicode.com/albums';
-
+const requestUrlPosts = 'https://jsonplaceholder.typicode.com/posts?_limit=20'
+const requestUrlPhotos = 'https://jsonplaceholder.typicode.com/photos?_page=7&_limit=20'
+const requestUrlComments = 'https://jsonplaceholder.typicode.com/comments?_page=7&_limit=20'
+const requestUrlAlbums = 'https://jsonplaceholder.typicode.com/albums?_limit=20'   
+ 
 let i = 1;
 function request(URL, i) {
     sendRequest('GET', URL)
-        .then (data => data.forEach(item => {  
+        .then (data => data.forEach(item => {
+            
+            imgProgress.hidden = false;
             let table = document.querySelector('#table');
+            let items = document.querySelectorAll('#pagination li');
             let pagination = document.querySelector('#pagination');
-            
-            let notesOnPage = 30;
-            let countOfItems = Math.ceil(data.length / notesOnPage);
-            
-            let showPage = (function() {
-                let active;
-                
-                return function(item) {
-                    if (active) {
-                        active.classList.remove('active');
-                    }
-                    active = item;
-                    
-                    item.classList.add('active');
-                    
-                    let pageNum = +item.innerHTML;
-                    
-                    let start = (pageNum - 1) * notesOnPage;
-                    let end = start + notesOnPage;
-                    
-                    let notes = data.slice(start, end);
-                    
-                    table.innerHTML = '';
-                    for (let note of notes) {
-                        let tr = document.createElement('tr');
+      
+              let tr = document.createElement('tr');
                         table.appendChild(tr);
-                        if (note.url) {
-                            createCell(note.title, tr);
-                            createCell(note.url, tr);          //photos
-                            createCell(note.thumbnailUrl , tr); 
+                       
+                        if (item.url) {
+                            createCell(item.title, tr);
+                            createCell(item.url, tr);          //photos
+                            createCell(item.thumbnailUrl , tr); 
                         } 
                         else 
-                            if (note.title && note.body) {
-                                createCell(note.title, tr);   //posts
-                                createCell(note.body, tr);          
+                            if (item.title && item.body) {
+                                createCell(item.title, tr);   //posts
+                                createCell(item.body, tr);          
                             }
                             else
-                                if (note.name) {
-                                    createCell(note.name, tr);   //comments
-                                    createCell(note.body, tr);
-                                    createCell(note.email, tr); 
+                                if (item.name) {
+                                    createCell(item.name, tr);   //comments
+                                    createCell(item.body, tr);
+                                    createCell(item.email, tr); 
                                 }    
                                 else
-                                    createCell(note.title, tr);  //albums            
-	    	        }
-                };
-            }());
-            
-            let items = [];
-            if (i != -1)
-            for ( i = 1; i <= countOfItems; i++) {
-                let li = document.createElement('li');
-                li.innerHTML = i;
-                pagination.appendChild(li);
-                items.push(li);
-                if (i==countOfItems) {
-                   i = -1;
-                   break;
-                }
-            }
-            
-            showPage(items[0]);
-            
-            for (item of items) {
-                item.addEventListener('click', function() {
-                    showPage(this);
-                });
-            }
-            
-            function createCell(text, tr) {
+                                    createCell(item.title, tr);  //albums
+	    	        
+               
+            function createCell(text, tr) {     
                 let td = document.createElement('td');
                 td.innerHTML = text;
                 tr.appendChild(td);
-            }            
+            }
         }))
         .catch(err => console.log(err)) 
-        
-        document.querySelector('#pagination').innerHTML = '';
-     }
+
+   document.querySelector('#pagination').innerHTML = '';
+   table.innerHTML = '';
+}
