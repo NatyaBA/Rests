@@ -27,10 +27,11 @@ function sendRequest(method, url, post=null) {
         xhr.send(JSON.stringify(post)); 
     })
 }
-const requestUrlPosts = 'https://jsonplaceholder.typicode.com/posts?_limit=20'
-const requestUrlPhotos = 'https://jsonplaceholder.typicode.com/photos?_page=7&_limit=20'
-const requestUrlComments = 'https://jsonplaceholder.typicode.com/comments?_page=7&_limit=20'
-const requestUrlAlbums = 'https://jsonplaceholder.typicode.com/albums?_limit=20'   
+
+const requestUrlPosts = 'https://jsonplaceholder.typicode.com/posts?_page=5&_limit=15',
+      requestUrlPhotos = 'https://jsonplaceholder.typicode.com/photos?_page=7&_limit=20',
+      requestUrlComments = 'https://jsonplaceholder.typicode.com/comments?_page=7&_limit=20', 
+      requestUrlAlbums = 'https://jsonplaceholder.typicode.com/albums?_page=5&_limit=20'   
  
 let i = 1;
 function request(URL, i) {
